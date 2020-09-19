@@ -10,6 +10,7 @@
 void bfs(std::vector<std::list<Edge > > Adj, int size) {
 	std::vector<bool> visited(size);
 	std::queue<int> q;
+	std::vector<int> d(size);
 	int root = 0;
 	q.push(root);
 	while(!q.empty()) {
@@ -19,10 +20,18 @@ void bfs(std::vector<std::list<Edge > > Adj, int size) {
 			Edge e = *it;
 			if(visited[e.to] == false) {
 				std::cout << e << std::endl;
+				d[e.to] = d[e.from] + 1;
 				q.push(e.to);
 			}
 		}
 		q.pop(); // pop queue head
 		visited[front] = true;
+	}
+
+	// distances 
+	std::cout << "distances" << std::endl;
+	for(int i = 0; i < size; i++) {
+		int distance = d[i];
+		std::cout << i << " " << distance << std::endl;
 	}
 }
